@@ -1,0 +1,72 @@
+﻿@model IEnumerable<prjLoginLab.Models.TEmployee>
+
+@{
+    ViewData["Title"] = "員工列表";
+}
+
+<h1>員工列表</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FGender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FMail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FSalary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FEployeeDate)
+            </th>
+            
+            
+           
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.FId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FGender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FMail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FSalary)
+            </td>
+            <td>
+                @{
+                    DateTime date = DateTime.Parse(item.FEployeeDate.ToString());
+                }
+                @date.ToShortDateString()
+            </td>
+    
+            
+            
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.FId" class="btn btn-warning">編輯</a> 
+                <a asp-action="Delete" asp-route-id="@item.FId" class="btn btn-danger"
+                onclick="return confirm('確認刪除 @item.FName 的會員資料?')">刪除</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
